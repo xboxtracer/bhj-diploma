@@ -12,7 +12,6 @@ class LoginForm extends AsyncForm {
    * */
   onSubmit( options ) {
     User.login(options, ( err, response ) => {
-      // console.log(err, response)
       if (!err) {
         console.log(response);
       } else {

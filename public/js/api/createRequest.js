@@ -5,7 +5,6 @@
 const createRequest = (options = {}) => {
     let newXHR = new XMLHttpRequest;
     
-    newXHR.open(options.method, options.url, true);
 
     for (let key in options.headers) {
         newXHR.setRequestHeader(key, options.headers[key]);
@@ -17,26 +16,33 @@ const createRequest = (options = {}) => {
 
     newXHR.onreadystatechange = function () {
         if(newXHR.readyState === XMLHttpRequest.DONE && newXHR.status === 200) {
-            let responsed = JSON.parse(this.response);
-            // console.log(responsed.success)
+            console.log(this.response);
+            let responsed = this.response;
             if(responsed.success) {
-                return options.callback(responsed.success, responsed.user)
+                return options.callback(responsed.success, responsed.user);
             } else {
-                return options.callback(responsed.success, responsed.error)
-            }
+                return options.callback(responsed.success, responsed.error);
+            };
         };
     };
 
-    if (options.method === 'POST') {
+
+    if (options.method !== 'GET') {
         let formData = new FormData;
         for(let key in options.data) {
             formData.append(key, options.data[key]);
         };
 
+        newXHR.open(options.method, options.url, true);
         newXHR.send(formData);
-        return newXHR
+        return newXHR;
     } else {
+        let email = options.url + '?';
+        for (let key in options.data) {
+            email += `${key}=${options.data[key]}&`
+        };
+        newXHR.open(options.method, email, true);
         newXHR.send();
-        return newXHR
+        return newXHR;
     };
 };

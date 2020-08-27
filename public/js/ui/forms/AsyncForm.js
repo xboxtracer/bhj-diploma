@@ -40,6 +40,7 @@ class AsyncForm {
     let formData = {};
     for(let key of someForm) {
       formData[key.name] = key.value;
+      key.value = '';
     };
     return formData
   }
@@ -52,8 +53,6 @@ class AsyncForm {
    * данные, полученные из метода getData()
    * */
   submit() {
-    // let data = this.getData();
-    // this.onSubmit(data);
     this.onSubmit(this.getData());
   }
 }
