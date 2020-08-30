@@ -19,6 +19,7 @@ class Entity {
       url: this.URL,
       data: data,
       method: 'GET',
+      responseType: 'json',
       callback: callback
     })
   }
@@ -29,10 +30,13 @@ class Entity {
    * что наследуется от Entity)
    * */
   static create( data, callback = f => f ) {
+    data._method =  'PUT';
+    console.log(data);
     return createRequest({
       url: this.URL,
       data: data,
       method: 'POST',
+      responseType: 'json',
       callback: callback
     })
 
@@ -43,8 +47,7 @@ class Entity {
    * (в зависимости от того, что наследуется от Entity)
    * */
   static get( id = '', data, callback = f => f ) {
-    data._method = 'PUT'
-    console.log(data)
+    // data._method = 'PUT'
     return createRequest({
       url: this.URL + '/' + id,
       data: data,

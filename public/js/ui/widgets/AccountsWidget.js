@@ -13,7 +13,10 @@ class AccountsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
-
+    // console.log(element)
+    this.element = element,
+    this.registerEvents(),
+    this.update()
   }
 
   /**
@@ -24,7 +27,9 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    * */
   registerEvents() {
-
+    this.element.querySelector('.create-account').addEventListener('click', ()=>{
+      App.modals.createAccount.open();
+    });
   }
 
   /**
@@ -38,6 +43,18 @@ class AccountsWidget {
    * метода renderItem()
    * */
   update() {
+    if(User.current()) {
+      Account.list(User.current(), (response)=>{
+        if(response.success) {
+          this.clear();
+          for(let key of response.data) {
+            this.renderItem(key);
+            // console.log(key)
+          }
+        };
+      });
+      // console.log(responsedAccountList)
+    }
 
   }
 
@@ -47,7 +64,10 @@ class AccountsWidget {
    * в боковой колонке
    * */
   clear() {
-
+    let allListelem = this.element;
+    while (allListelem.lastChild.classList == 'account') {
+      allListelem.removeChild(allListelem.lastChild);
+    };
   }
 
   /**
@@ -58,7 +78,15 @@ class AccountsWidget {
    * Вызывает App.showPage( 'transactions', { account_id: id_счёта });
    * */
   onSelectAccount( element ) {
-
+    let accountElement = element.parentElement.querySelectorAll('.account')
+    for(let key of accountElement) {
+      if(key.classList.contains('active')){
+        key.classList.remove('active');
+      };
+    };
+    element.classList.add('active');
+    // console.log(element.dataset.id)
+    App.showPage( 'transactions', { account_id: element.dataset.id });
   }
 
   /**
@@ -67,7 +95,18 @@ class AccountsWidget {
    * item - объект с данными о счёте
    * */
   getAccountHTML( item ) {
-
+    // console.log(item)
+    let listElement = document.createElement('li');
+    listElement.classList.add('account');
+    listElement.addEventListener('click', ()=>{
+      this.onSelectAccount(listElement);
+    });
+    listElement.dataset.id = `${item.id}`;
+    let innerLink = document.createElement('a');
+    innerLink.setAttribute('href', '#');
+    innerLink.innerHTML = `<span>${item.name}</span> / <span>${item.sum} ₽</span>`;
+    listElement.append(innerLink);
+    return listElement
   }
 
   /**
@@ -77,6 +116,6 @@ class AccountsWidget {
    * и добавляет его внутрь элемента виджета
    * */
   renderItem( item ) {
-
+    this.element.append(this.getAccountHTML(item));
   }
 }

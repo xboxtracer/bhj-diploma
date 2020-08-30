@@ -36,7 +36,9 @@ class AsyncForm {
    * }
    * */
   getData() {
-    let someForm = this.element.querySelectorAll('input');
+    // let someForm = this.element.querySelectorAll('input');
+    let someForm = this.element.querySelectorAll('.form-control');
+    console.log(someForm)
     let formData = {};
     for(let key of someForm) {
       formData[key.name] = key.value;

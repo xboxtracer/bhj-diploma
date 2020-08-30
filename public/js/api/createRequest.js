@@ -16,13 +16,9 @@ const createRequest = (options = {}) => {
 
     newXHR.onreadystatechange = function () {
         if(newXHR.readyState === XMLHttpRequest.DONE && newXHR.status === 200) {
-            console.log(this.response);
+            // console.log(this.response);
             let responsed = this.response;
-            if(responsed.success) {
-                return options.callback(responsed.success, responsed.user);
-            } else {
-                return options.callback(responsed.success, responsed.error);
-            };
+            return options.callback(responsed);
         };
     };
 
@@ -30,13 +26,16 @@ const createRequest = (options = {}) => {
     if (options.method !== 'GET') {
         let formData = new FormData;
         for(let key in options.data) {
+            // console.log(key, options.data[key])
             formData.append(key, options.data[key]);
         };
+        // console.log(options.method)
 
         newXHR.open(options.method, options.url, true);
         newXHR.send(formData);
         return newXHR;
     } else {
+        // console.log(options.data)
         let email = options.url + '?';
         for (let key in options.data) {
             email += `${key}=${options.data[key]}&`

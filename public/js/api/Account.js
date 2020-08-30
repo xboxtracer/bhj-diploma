@@ -4,9 +4,10 @@
  * Имеет свойство URL со значением '/account'
  * */
 class Account extends Entity {
+    static URL = '/account'
     // constructor() {
     //     super('/account')
     // }
 }
 
-Account.URL = '/account';
+// Account.URL = '/account';

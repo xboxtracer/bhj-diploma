@@ -11,14 +11,19 @@ class TransactionsPage {
    * через registerEvents()
    * */
   constructor( element ) {
-
+    // console.log(element.querySelector('.content')[0])
+    // if(!element.querySelector('.content')[0]) {
+    //   throw 'Error'
+    // }
+    this.element = element,
+    this.registerEvents()
   }
 
   /**
    * Вызывает метод render для отрисовки страницы
    * */
   update() {
-
+    // console.log(1)
   }
 
   /**
@@ -28,7 +33,10 @@ class TransactionsPage {
    * TransactionsPage.removeAccount соответственно
    * */
   registerEvents() {
-
+    // console.log(this.element.querySelectorAll('.btn-danger'))
+    // this.element.querySelectorAll('.btn-danger').addEventListener('click', ()=>{
+    //   console.log(1)
+    // })
   }
 
   /**
@@ -59,7 +67,27 @@ class TransactionsPage {
    * в TransactionsPage.renderTransactions()
    * */
   render( options ) {
-
+    Account.get(options.account_id, {name: User.current().name}, (response)=>{
+      // console.log(response)
+      if(response.success) {
+        // console.log(response.data.name)
+        this.renderTitle(response.data.name);
+        Transaction.list({account_id: response.data.id}, (response)=>{
+          // console.log(response.data)
+          if(response.success) {
+            this.clear();
+            // let someData = [{
+            //   "id": 12,
+            //   "type": "expense",
+            //   "name": "Новый будильник",
+            //   "date": "2019-03-10 00:20:41",
+            //   "sum": 200
+            // }];
+            this.renderTransactions(response.data);
+          }
+        })
+      };
+    })
   }
 
   /**
@@ -68,14 +96,14 @@ class TransactionsPage {
    * Устанавливает заголовок: «Название счёта»
    * */
   clear() {
-
+    this.renderTransactions([])
   }
 
   /**
    * Устанавливает заголовок в элемент .content-title
    * */
   renderTitle( name ) {
-
+    this.element.querySelector('.content-title').innerText = name;
   }
 
   /**
@@ -83,7 +111,11 @@ class TransactionsPage {
    * в формат «10 марта 2019 г. в 03:20»
    * */
   formatDate( date ) {
+    let postDate = new Date(date)
 
+    var month = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
+    
+    return `${postDate.getDate()} ${month[postDate.getMonth()]} ${postDate.getFullYear()} г. ${postDate.getHours()}:${postDate.getMinutes()}`
   }
 
   /**
@@ -91,7 +123,38 @@ class TransactionsPage {
    * item - объект с информацией о транзакции
    * */
   getTransactionHTML( item ) {
-
+    // console.log(item);
+    let divTransaction = document.createElement('div');
+    divTransaction.classList.add('transaction');
+    if(item.type === 'expense'){
+      divTransaction.classList.add('transaction_expense');
+    } else if(item.type === 'income'){
+      divTransaction.classList.add('transaction_income');
+    };
+    divTransaction.innerHTML = `
+    <div class="col-md-7 transaction__details">
+      <div class="transaction__icon">
+          <span class="fa fa-money fa-2x"></span>
+      </div>
+      <div class="transaction__info">
+          <h4 class="transaction__title">${item.name}</h4>
+          <!-- дата -->
+          <div class="transaction__date">${this.formatDate(item.created_at)}</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="transaction__summ">
+      <!--  сумма -->
+          ${item.sum} <span class="currency">₽</span>
+      </div>
+    </div>
+    <div class="col-md-2 transaction__controls">
+        <!-- в data-id нужно поместить id -->
+        <button class="btn btn-danger transaction__remove" data-id="${item.id}">
+            <i class="fa fa-trash"></i>  
+        </button>
+    </div>`;
+    return divTransaction
   }
 
   /**
@@ -99,6 +162,15 @@ class TransactionsPage {
    * используя getTransactionHTML
    * */
   renderTransactions( data ) {
-
+    let contentDiv = this.element.querySelector('.content')
+    if(data[0] === undefined) {
+      while (contentDiv.firstChild) {
+        contentDiv.removeChild(contentDiv.firstChild);
+      };
+    } else {
+      for(let key of data) {
+        contentDiv.append(this.getTransactionHTML(key));
+      }
+    }
   }
 }
