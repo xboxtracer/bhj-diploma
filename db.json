@@ -32,24 +32,9 @@
       "id": "3"
     },
     {
-      "name": "Pizza",
+      "name": "Илья",
       "user_id": "1",
-      "id": "4enu84pkkedw6y9c"
-    },
-    {
-      "name": "Pizza",
-      "user_id": "1",
-      "id": "4enu82akkedwa763"
-    },
-    {
-      "name": "Pizza",
-      "user_id": "1",
-      "id": "4enu88cokedwoyrl"
-    },
-    {
-      "name": "доблести",
-      "user_id": "1",
-      "id": "4enu8ajskegq9228"
+      "id": "4enu8af0kegyjcm3"
     }
   ],
   "transactions": [
@@ -187,48 +172,6 @@
       "sum": 300000,
       "type": "expense",
       "user_id": "1"
-    },
-    {
-      "id": "4enu8ae0keeotxey",
-      "type": "INCOME",
-      "name": "Pizza",
-      "sum": 235,
-      "created_at": "2020-08-28T20:27:48.201Z"
-    },
-    {
-      "id": "4enu83x4kegq8six",
-      "type": "INCOME",
-      "name": "Pizza",
-      "sum": 235,
-      "created_at": "2020-08-30T06:42:53.672Z"
-    },
-    {
-      "id": "4enu8auckegqb5hl",
-      "type": "INCOME",
-      "name": "Pizza",
-      "sum": 235,
-      "created_at": "2020-08-30T06:44:43.784Z"
-    },
-    {
-      "id": "4enu846okegsejcs",
-      "type": "INCOME",
-      "name": "Pizza",
-      "sum": 235,
-      "created_at": "2020-08-30T07:43:20.955Z"
-    },
-    {
-      "id": "4enu89zgkegsf60g",
-      "type": "INCOME",
-      "name": "Pizza",
-      "sum": 235,
-      "created_at": "2020-08-30T07:43:50.319Z"
-    },
-    {
-      "id": "4enu88iokegsfvc1",
-      "type": "INCOME",
-      "name": "Pizza",
-      "sum": 235,
-      "created_at": "2020-08-30T07:44:23.136Z"
     }
   ]
 }

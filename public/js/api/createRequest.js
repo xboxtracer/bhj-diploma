@@ -4,7 +4,7 @@
  * */
 const createRequest = (options = {}) => {
     let newXHR = new XMLHttpRequest;
-    
+    // console.log(options)    
 
     for (let key in options.headers) {
         newXHR.setRequestHeader(key, options.headers[key]);
@@ -13,6 +13,8 @@ const createRequest = (options = {}) => {
     if (options.responseType) {
         newXHR.responseType = options.responseType;
     };
+
+    newXHR.withCredentials = true;
 
     newXHR.onreadystatechange = function () {
         if(newXHR.readyState === XMLHttpRequest.DONE && newXHR.status === 200) {
@@ -29,7 +31,8 @@ const createRequest = (options = {}) => {
             // console.log(key, options.data[key])
             formData.append(key, options.data[key]);
         };
-        // console.log(options.method)
+        console.log(options.data)
+        // newXHR._method = options.data._method;
 
         newXHR.open(options.method, options.url, true);
         newXHR.send(formData);

@@ -44,6 +44,11 @@ class AsyncForm {
       formData[key.name] = key.value;
       key.value = '';
     };
+    formData.type = this.element.querySelector('input').value;
+    if(User.current()){
+      formData.user_id = User.current().id;
+    };
+    console.log(formData)
     return formData
   }
 

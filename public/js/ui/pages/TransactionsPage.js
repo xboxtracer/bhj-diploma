@@ -11,10 +11,7 @@ class TransactionsPage {
    * через registerEvents()
    * */
   constructor( element ) {
-    // console.log(element.querySelector('.content')[0])
-    // if(!element.querySelector('.content')[0]) {
-    //   throw 'Error'
-    // }
+    console.log(element)
     this.element = element,
     this.registerEvents()
   }
@@ -23,7 +20,7 @@ class TransactionsPage {
    * Вызывает метод render для отрисовки страницы
    * */
   update() {
-    // console.log(1)
+    this.render({account_id: User.current().id})
   }
 
   /**
@@ -33,7 +30,15 @@ class TransactionsPage {
    * TransactionsPage.removeAccount соответственно
    * */
   registerEvents() {
-    // console.log(this.element.querySelectorAll('.btn-danger'))
+    let buttonRemove = this.element.querySelectorAll('.btn');
+    for(let key of buttonRemove) {
+      // console.log(key)
+      if(key.dataset.id) {
+        key.addEventListener('click', ()=>{this.removeTransaction(key.dataset.id)});
+      } else {
+        key.addEventListener('click', ()=>{this.removeAccount()});
+      };
+    }
     // this.element.querySelectorAll('.btn-danger').addEventListener('click', ()=>{
     //   console.log(1)
     // })
@@ -48,7 +53,16 @@ class TransactionsPage {
    * для обновления приложения
    * */
   removeAccount() {
-
+    let confirmDeleteAccount = confirm();
+    if(confirmDeleteAccount){
+      let activeAccount = document.querySelector('li.active').dataset.id;
+      Account.remove(activeAccount, {}, (response)=>{
+        if(response.success){
+          this.clear();
+          App.update();
+        }
+      });
+    }
   }
 
   /**
@@ -57,7 +71,15 @@ class TransactionsPage {
    * По удалению транзакции вызовите метод App.update()
    * */
   removeTransaction( id ) {
-
+    console.log(id)
+    let confirmDeleteTransaction = confirm();
+    if(confirmDeleteTransaction){
+      Transaction.remove(id, {}, (response)=>{
+        if(response.success){
+          App.update();
+        }
+      });
+    }
   }
 
   /**
@@ -67,6 +89,7 @@ class TransactionsPage {
    * в TransactionsPage.renderTransactions()
    * */
   render( options ) {
+    // console.log(options)
     Account.get(options.account_id, {name: User.current().name}, (response)=>{
       // console.log(response)
       if(response.success) {
@@ -126,9 +149,9 @@ class TransactionsPage {
     // console.log(item);
     let divTransaction = document.createElement('div');
     divTransaction.classList.add('transaction');
-    if(item.type === 'expense'){
+    if(item.type.toLowerCase() === 'expense'){
       divTransaction.classList.add('transaction_expense');
-    } else if(item.type === 'income'){
+    } else if(item.type.toLowerCase() === 'income'){
       divTransaction.classList.add('transaction_income');
     };
     divTransaction.innerHTML = `
@@ -171,6 +194,7 @@ class TransactionsPage {
       for(let key of data) {
         contentDiv.append(this.getTransactionHTML(key));
       }
+      this.registerEvents();
     }
   }
 }

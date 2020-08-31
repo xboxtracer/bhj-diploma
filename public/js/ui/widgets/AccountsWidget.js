@@ -49,11 +49,9 @@ class AccountsWidget {
           this.clear();
           for(let key of response.data) {
             this.renderItem(key);
-            // console.log(key)
           }
         };
       });
-      // console.log(responsedAccountList)
     }
 
   }
