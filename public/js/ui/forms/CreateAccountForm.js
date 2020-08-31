@@ -12,9 +12,9 @@ class CreateAccountForm extends AsyncForm {
    * */
   onSubmit( options ) {
     // console.log(options)
-    Account.create(options, ( err, response ) => {
+    Account.create(options, ( response ) => {
       // console.log(err, response)
-      if (!err) {
+      if (response.error) {
         console.log(response);
       } else {
         App.modals.createAccount.close();
