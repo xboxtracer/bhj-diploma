@@ -5,14 +5,14 @@
       "email": "demo@demo",
       "password": "demo",
       "id": "1",
-      "isAuthorized": true
+      "isAuthorized": false
     },
     {
       "name": "Elias",
       "email": "xboxtracer@yandex.ru",
       "password": "12345",
       "id": "4enu87vwkecg1pj4",
-      "isAuthorized": false
+      "isAuthorized": true
     }
   ],
   "accounts": [
@@ -32,9 +32,9 @@
       "id": "3"
     },
     {
-      "name": "Pizza",
-      "user_id": "1",
-      "id": "4enu86d4ketnhtwe"
+      "name": "Elias",
+      "user_id": "4enu87vwkecg1pj4",
+      "id": "4enu88j4kevbzunr"
     }
   ],
   "transactions": [
@@ -180,6 +180,102 @@
       "sum": 235,
       "account_id": "4enu87psketncce7",
       "created_at": "2020-09-08T07:42:55.698Z"
+    },
+    {
+      "id": "4enu81ngkev4z5ll",
+      "type": "INCOME",
+      "name": "Pizza",
+      "sum": 235,
+      "account_id": "4enu85ukkev4z3z3",
+      "created_at": "2020-09-09T08:44:04.760Z"
+    },
+    {
+      "id": "4enu86d8kev512wf",
+      "type": "INCOME",
+      "name": "Elias",
+      "sum": 48568,
+      "account_id": "4enu85ukkev4z3z3",
+      "created_at": "2020-09-09T08:45:34.574Z"
+    },
+    {
+      "id": "4enu875kkevbe80n",
+      "type": "INCOME",
+      "name": "доблести",
+      "sum": 235,
+      "account_id": "4enu8ajkkev5d88m",
+      "created_at": "2020-09-09T11:43:45.430Z"
+    },
+    {
+      "id": "4enu81x8kevbpplv",
+      "type": "INCOME",
+      "name": "доблести",
+      "sum": 235,
+      "account_id": "4enu85ukkev4z3z3",
+      "created_at": "2020-09-09T11:52:41.442Z"
+    },
+    {
+      "id": "4enu8c6gkevbwxi0",
+      "type": "INCOME",
+      "name": "доблести",
+      "sum": 235,
+      "account_id": "4enu85ukkev4z3z3",
+      "created_at": "2020-09-09T11:58:18.263Z"
+    },
+    {
+      "id": "4enu87gwkevbx3xs",
+      "type": "INCOME",
+      "name": "Pizza",
+      "sum": 48568,
+      "account_id": "4enu8810kevbterg",
+      "created_at": "2020-09-09T11:58:26.607Z"
+    },
+    {
+      "id": "4enu86zkkevc00wv",
+      "type": "INCOME",
+      "name": "доблести",
+      "sum": 48568,
+      "account_id": "4enu87w4kevbzwkz",
+      "created_at": "2020-09-09T12:00:42.654Z"
+    },
+    {
+      "id": "4enu893gkevc06wf",
+      "type": "EXPENSE",
+      "name": "Илья",
+      "sum": 2563,
+      "account_id": "4enu88j4kevbzunr",
+      "created_at": "2020-09-09T12:00:50.414Z"
+    },
+    {
+      "id": "4enu84ekkevc7c5v",
+      "type": "INCOME",
+      "name": "Pizza",
+      "sum": 235,
+      "account_id": "4enu8c9gkevc75cp",
+      "created_at": "2020-09-09T12:06:23.826Z"
+    },
+    {
+      "id": "4enu8auckevc7h3n",
+      "type": "EXPENSE",
+      "name": "Pizza",
+      "sum": 2563,
+      "account_id": "4enu8c9gkevc75cp",
+      "created_at": "2020-09-09T12:06:30.226Z"
+    },
+    {
+      "id": "4enu83xgkevc7o9h",
+      "type": "INCOME",
+      "name": "Pizza",
+      "sum": 48568,
+      "account_id": "4enu8at4kevc76wr",
+      "created_at": "2020-09-09T12:06:39.508Z"
+    },
+    {
+      "id": "4enu85l0kevc7slu",
+      "type": "EXPENSE",
+      "name": "Илья",
+      "sum": 48568,
+      "account_id": "4enu8at4kevc76wr",
+      "created_at": "2020-09-09T12:06:45.137Z"
     }
   ]
 }

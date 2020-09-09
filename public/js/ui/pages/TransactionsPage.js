@@ -35,18 +35,15 @@ class TransactionsPage {
    * TransactionsPage.removeAccount соответственно
    * */
   registerEvents() {
-    let buttonRemove = this.element.querySelectorAll('.btn');
+    let buttonRemove = this.element.querySelectorAll('.transaction__remove');
     for(let key of buttonRemove) {
-      // console.log(key)
-      if(key.dataset.id) {
         key.addEventListener('click', ()=>{this.removeTransaction(key.dataset.id)});
-      } else {
-        key.addEventListener('click', ()=>{this.removeAccount()});
-      };
+    };
+
+    if (!this.element.querySelector('.remove-account').dataset.listener) {
+      this.element.querySelector('.remove-account').addEventListener('click', ()=>{this.removeAccount()});
+      this.element.querySelector('.remove-account').dataset.listener = true;
     }
-    // this.element.querySelectorAll('.btn-danger').addEventListener('click', ()=>{
-    //   console.log(1)
-    // })
   }
 
   /**
@@ -62,16 +59,14 @@ class TransactionsPage {
     if(confirmDeleteAccount){
       let activeAccount = document.querySelector('li.active').dataset.id;
       Account.remove(activeAccount, {}, (response)=>{
-        // console.log(response)
-        this.clear();
-        // AccountsWidget.clear();
+        console.log(response)
         if(response.success){
           this.clear();
-          // AccountsWidget.update();
           App.update();
         }
       });
     }
+    this.clear();
   }
 
   /**
@@ -80,13 +75,13 @@ class TransactionsPage {
    * По удалению транзакции вызовите метод App.update()
    * */
   removeTransaction( id ) {
-    // console.log(id)
+    console.log(id)
     let confirmDeleteTransaction = confirm();
     if(confirmDeleteTransaction){
       Transaction.remove(id, {}, (response)=>{
         if(response.success){
           this.clear();
-          App.update();
+          App.updatePages();
         }
       });
     }
@@ -104,12 +99,12 @@ class TransactionsPage {
       // console.log(response)
       if(response.success) {
         // console.log(response.data.name)
-        this.renderTitle(response.data.name);
-        Transaction.list({account_id: response.data.id}, (response)=>{
-          // console.log(response.data)
-          if(response.success) {
+        Transaction.list({account_id: response.data.id}, (responseList)=>{
+          // console.log(responseList.data)
+          if(responseList.success) {
             this.clear();
-            this.renderTransactions(response.data);
+            this.renderTitle(response.data.name);
+            this.renderTransactions(responseList.data);
           }
         })
       };
@@ -123,6 +118,7 @@ class TransactionsPage {
    * */
   clear() {
     this.renderTransactions([])
+    this.renderTitle('Название счёта');
   }
 
   /**
