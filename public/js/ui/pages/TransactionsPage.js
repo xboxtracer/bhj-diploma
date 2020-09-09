@@ -11,7 +11,7 @@ class TransactionsPage {
    * через registerEvents()
    * */
   constructor( element ) {
-    console.log(element)
+    // console.log(element)
     this.element = element,
     this.registerEvents()
   }
@@ -20,7 +20,12 @@ class TransactionsPage {
    * Вызывает метод render для отрисовки страницы
    * */
   update() {
-    this.render({account_id: User.current().id})
+    // this.render({account_id: User.current().id})
+    let accountId = document.querySelector('li.active');
+    if (accountId) {
+      // console.log(accountId.dataset.id);
+      this.render({account_id: accountId.dataset.id})
+    }
   }
 
   /**
@@ -57,8 +62,12 @@ class TransactionsPage {
     if(confirmDeleteAccount){
       let activeAccount = document.querySelector('li.active').dataset.id;
       Account.remove(activeAccount, {}, (response)=>{
+        // console.log(response)
+        this.clear();
+        // AccountsWidget.clear();
         if(response.success){
           this.clear();
+          // AccountsWidget.update();
           App.update();
         }
       });
@@ -71,11 +80,12 @@ class TransactionsPage {
    * По удалению транзакции вызовите метод App.update()
    * */
   removeTransaction( id ) {
-    console.log(id)
+    // console.log(id)
     let confirmDeleteTransaction = confirm();
     if(confirmDeleteTransaction){
       Transaction.remove(id, {}, (response)=>{
         if(response.success){
+          this.clear();
           App.update();
         }
       });
@@ -99,13 +109,6 @@ class TransactionsPage {
           // console.log(response.data)
           if(response.success) {
             this.clear();
-            // let someData = [{
-            //   "id": 12,
-            //   "type": "expense",
-            //   "name": "Новый будильник",
-            //   "date": "2019-03-10 00:20:41",
-            //   "sum": 200
-            // }];
             this.renderTransactions(response.data);
           }
         })

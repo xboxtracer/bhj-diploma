@@ -31,7 +31,7 @@ class Entity {
    * */
   static create( data, callback = f => f ) {
     data._method =  'PUT';
-    console.log(data, this.URL);
+    // console.log(data, this.URL);
     return createRequest({
       url: this.URL,
       data: data,

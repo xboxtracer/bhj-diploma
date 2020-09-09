@@ -32,9 +32,9 @@
       "id": "3"
     },
     {
-      "name": "Илья",
+      "name": "Pizza",
       "user_id": "1",
-      "id": "4enu8af0kegyjcm3"
+      "id": "4enu86d4ketnhtwe"
     }
   ],
   "transactions": [
@@ -172,6 +172,14 @@
       "sum": 300000,
       "type": "expense",
       "user_id": "1"
+    },
+    {
+      "id": "4enu88osketncnv7",
+      "type": "EXPENSE",
+      "name": "Pizza",
+      "sum": 235,
+      "account_id": "4enu87psketncce7",
+      "created_at": "2020-09-08T07:42:55.698Z"
     }
   ]
 }

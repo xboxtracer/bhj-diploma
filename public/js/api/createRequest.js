@@ -31,7 +31,7 @@ const createRequest = (options = {}) => {
             // console.log(key, options.data[key])
             formData.append(key, options.data[key]);
         };
-        console.log(options.data)
+        // console.log(options.data)
         // newXHR._method = options.data._method;
 
         newXHR.open(options.method, options.url, true);
@@ -43,6 +43,7 @@ const createRequest = (options = {}) => {
         for (let key in options.data) {
             email += `${key}=${options.data[key]}&`
         };
+        // console.log(options.data);
         newXHR.open(options.method, email, true);
         newXHR.send();
         return newXHR;

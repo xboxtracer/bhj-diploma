@@ -38,7 +38,7 @@ class AsyncForm {
   getData() {
     // let someForm = this.element.querySelectorAll('input');
     let someForm = this.element.querySelectorAll('.form-control');
-    console.log(someForm)
+    // console.log(someForm)
     let formData = {};
     for(let key of someForm) {
       formData[key.name] = key.value;
@@ -48,7 +48,7 @@ class AsyncForm {
     if(User.current()){
       formData.user_id = User.current().id;
     };
-    console.log(formData)
+    // console.log(formData)
     return formData
   }
 

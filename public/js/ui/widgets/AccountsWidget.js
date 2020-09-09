@@ -48,6 +48,7 @@ class AccountsWidget {
         if(response.success) {
           this.clear();
           for(let key of response.data) {
+            // console.log(key)
             this.renderItem(key);
           }
         };
@@ -63,9 +64,14 @@ class AccountsWidget {
    * */
   clear() {
     let allListelem = this.element;
-    while (allListelem.lastChild.classList == 'account') {
-      allListelem.removeChild(allListelem.lastChild);
-    };
+    if(allListelem.lastChild.classList) {
+      while (allListelem.lastChild.classList.contains('account')) {
+        allListelem.removeChild(allListelem.lastChild);
+        if(!allListelem.lastChild.classList) {
+          break
+        }
+      };
+    }
   }
 
   /**
@@ -76,8 +82,8 @@ class AccountsWidget {
    * Вызывает App.showPage( 'transactions', { account_id: id_счёта });
    * */
   onSelectAccount( element ) {
-    let accountElement = element.parentElement.querySelectorAll('.account')
-    for(let key of accountElement) {
+    let accountElements = element.parentElement.querySelectorAll('.account')
+    for(let key of accountElements) {
       if(key.classList.contains('active')){
         key.classList.remove('active');
       };
