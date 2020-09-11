@@ -81,7 +81,7 @@ class TransactionsPage {
       Transaction.remove(id, {}, (response)=>{
         if(response.success){
           this.clear();
-          App.updatePages();
+          App.update();
         }
       });
     }

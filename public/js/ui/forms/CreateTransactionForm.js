@@ -46,7 +46,7 @@ class CreateTransactionForm extends AsyncForm {
       if (!response.success) {
         console.log(response);
       } else {
-        App.updatePages();
+        App.update();
         App.modals.newIncome.close();
         App.modals.newExpense.close();
       }

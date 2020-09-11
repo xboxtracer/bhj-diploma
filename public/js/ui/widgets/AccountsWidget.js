@@ -51,6 +51,15 @@ class AccountsWidget {
             // console.log(key)
             this.renderItem(key);
           }
+          let accountActive = this.element.querySelectorAll(`li[data-id="${JSON.parse(localStorage['accountActive']).account_id}"]`)[0];
+          console.log(accountActive);
+          if(localStorage['accountActive'] && accountActive !== undefined){
+            // console.log(JSON.parse(localStorage['accountActive']).account_id)
+            // console.log(this.element.querySelectorAll('li'))
+            // console.log(this.element.querySelectorAll(`li[data-id="${JSON.parse(localStorage['accountActive']).account_id}"]`)[0])
+            // this.element.querySelectorAll(`li[data-id="${JSON.parse(localStorage['accountActive']).account_id}"]`)[0].classList.add('active')
+            this.onSelectAccount(this.element.querySelectorAll(`li[data-id="${JSON.parse(localStorage['accountActive']).account_id}"]`)[0])
+          }
         };
       });
     }
@@ -88,7 +97,8 @@ class AccountsWidget {
       };
     };
     element.classList.add('active');
-    // console.log(element.dataset.id)
+    // console.log(element.dataset.id);
+    localStorage['accountActive'] = JSON.stringify({ account_id: element.dataset.id });
     App.showPage( 'transactions', { account_id: element.dataset.id });
   }
 

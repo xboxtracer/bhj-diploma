@@ -35,6 +35,16 @@
       "name": "Elias",
       "user_id": "4enu87vwkecg1pj4",
       "id": "4enu88j4kevbzunr"
+    },
+    {
+      "name": "доблести",
+      "user_id": "4enu87vwkecg1pj4",
+      "id": "4enu81b4kexvra3n"
+    },
+    {
+      "name": "Elias",
+      "user_id": "4enu87vwkecg1pj4",
+      "id": "4enu811gkexxd6qz"
     }
   ],
   "transactions": [
@@ -276,6 +286,14 @@
       "sum": 48568,
       "account_id": "4enu8at4kevc76wr",
       "created_at": "2020-09-09T12:06:45.137Z"
+    },
+    {
+      "id": "4enu83ygkexxejcw",
+      "type": "EXPENSE",
+      "name": "Pizza",
+      "sum": 235,
+      "account_id": "4enu86fskexxeeau",
+      "created_at": "2020-09-11T07:35:24.031Z"
     }
   ]
 }

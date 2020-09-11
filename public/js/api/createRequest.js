@@ -43,7 +43,7 @@ const createRequest = (options = {}) => {
         for (let key in options.data) {
             email += `${key}=${options.data[key]}&`
         };
-        console.log(options.data);
+        // console.log(options.data);
         newXHR.open(options.method, email, true);
         newXHR.send();
         return newXHR;
